@@ -10,7 +10,7 @@
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit",
     "test": "tsx --test tests/calculations.test.ts",
-    "deploy:cloudflare": "npm run build && npx wrangler pages deploy dist"
+    "deploy:cloudflare": "npm run build && npx wrangler deploy"
   },
   "dependencies": {
     "@firebase/eslint-plugin-security-rules": "^0.0.2",
