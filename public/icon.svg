@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#1E3A8A"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#60A5FA"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
+  <!-- Subtle car silhouette -->
+  <path d="M104 300 C112 252 148 214 198 206 L284 206 C332 206 372 232 396 272 L420 286 C432 292 438 304 438 318 L438 342 C438 352 430 360 420 360 L394 360 A40 40 0 0 1 314 360 L198 360 A40 40 0 0 1 118 360 L92 360 C82 360 74 352 74 342 L74 322 C74 308 86 300 104 300 Z" fill="#FFFFFF" fill-opacity="0.95"/>
+  <!-- Wheels -->
+  <circle cx="158" cy="360" r="28" fill="#0F172A" stroke="#93C5FD" stroke-width="6"/>
+  <circle cx="354" cy="360" r="28" fill="#0F172A" stroke="#93C5FD" stroke-width="6"/>
+  <!-- Paint spray mist & gun nozzle motif -->
+  <path d="M180 128 L256 128 L272 152 L224 168 L180 152 Z" fill="url(#accent)"/>
+  <circle cx="308" cy="146" r="7" fill="#93C5FD"/>
+  <circle cx="336" cy="134" r="9" fill="#60A5FA"/>
+  <circle cx="338" cy="164" r="6" fill="#BFDBFE"/>
+  <circle cx="368" cy="148" r="10" fill="#3B82F6"/>
+  <circle cx="372" cy="180" r="7" fill="#93C5FD"/>
+</svg>

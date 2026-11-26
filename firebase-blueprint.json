@@ -1,0 +1,521 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Authenticated workshop owner account serving as the Master Gate for cross-device sync.",
+      "type": "object",
+      "properties": {
+        "ownerId": {
+          "type": "string",
+          "description": "Firebase Auth UID of the user",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Verified Google account email",
+          "maxLength": 254
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User display name",
+          "maxLength": 120
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when profile was created"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp when profile was updated"
+        }
+      },
+      "required": ["ownerId", "email", "displayName", "createdAt", "updatedAt"]
+    },
+    "WorkshopSettings": {
+      "title": "WorkshopSettings",
+      "description": "Workshop configuration, localization, theme, and current USD/UAH exchange rate.",
+      "type": "object",
+      "properties": {
+        "ownerId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "id": {
+          "type": "string",
+          "enum": ["app_settings"]
+        },
+        "workshopId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "workshopName": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "workshopPhone": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "workshopAddress": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "locale": {
+          "type": "string",
+          "enum": ["uk", "ru"]
+        },
+        "theme": {
+          "type": "string",
+          "enum": ["light", "dark", "system"]
+        },
+        "currentExchangeRate": {
+          "type": "object",
+          "description": "Current USD/UAH rate snapshot"
+        },
+        "reminderSnoozedUntil": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "schemaVersion": {
+          "type": "number"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "ownerId",
+        "id",
+        "workshopId",
+        "workshopName",
+        "locale",
+        "theme",
+        "currentExchangeRate",
+        "schemaVersion",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "Estimate": {
+      "title": "Estimate",
+      "description": "Auto body repair and painting order/estimate with frozen exchange rate and stages.",
+      "type": "object",
+      "properties": {
+        "ownerId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "estimateNumber": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "workshopId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "schemaVersion": {
+          "type": "number"
+        },
+        "clientCreatedAt": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "clientUpdatedAt": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "orderDate": {
+          "type": "string",
+          "maxLength": 20,
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "dueDate": {
+          "type": "string",
+          "maxLength": 20
+        },
+        "orderPhase": {
+          "type": "string",
+          "enum": ["preliminary", "final"]
+        },
+        "preliminaryTotalUah": {
+          "type": "number"
+        },
+        "preliminaryLockedAt": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "deposit": {
+          "type": "object",
+          "description": "Expected and actually received deposit info"
+        },
+        "customerName": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "customerPhone": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "vehicleType": {
+          "type": "string",
+          "enum": ["car", "van", "truck"]
+        },
+        "vehicleMake": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "vehicleModel": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "vehicleYear": {
+          "type": "string",
+          "maxLength": 12
+        },
+        "vehicleColor": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "notes": {
+          "type": "string",
+          "maxLength": 1500
+        },
+        "selectedParts": {
+          "type": "array",
+          "description": "Selected vehicle part IDs (max 60)"
+        },
+        "doubleSidedParts": {
+          "type": "array",
+          "description": "Selected parts painted on both sides (max 60)"
+        },
+        "laborItems": {
+          "type": "array",
+          "description": "Configured labor operations (max 250)"
+        },
+        "stages": {
+          "type": "array",
+          "description": "Workflow completion stages (max 12)"
+        },
+        "materialsMode": {
+          "type": "string",
+          "enum": ["quick", "detailed"]
+        },
+        "quickMaterialMultiplier": {
+          "type": "number"
+        },
+        "quickMaterials": {
+          "type": "array",
+          "description": "Quick mode material rows (max 150)"
+        },
+        "detailedMaterials": {
+          "type": "array",
+          "description": "Detailed mode material rows (max 150)"
+        },
+        "adjustment": {
+          "type": "object"
+        },
+        "exchangeRate": {
+          "type": "object"
+        },
+        "totals": {
+          "type": "object"
+        },
+        "isSample": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "ownerId",
+        "id",
+        "estimateNumber",
+        "workshopId",
+        "schemaVersion",
+        "clientCreatedAt",
+        "clientUpdatedAt",
+        "orderDate",
+        "customerName",
+        "vehicleType",
+        "vehicleMake",
+        "vehicleModel",
+        "selectedParts",
+        "laborItems",
+        "stages",
+        "materialsMode",
+        "quickMaterialMultiplier",
+        "quickMaterials",
+        "detailedMaterials",
+        "adjustment",
+        "exchangeRate",
+        "totals",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "MaterialCatalogItem": {
+      "title": "MaterialCatalogItem",
+      "description": "Paint or consumable material entry with package price and size.",
+      "type": "object",
+      "properties": {
+        "ownerId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "workshopId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 140
+        },
+        "category": {
+          "type": "string",
+          "enum": ["basecoat", "clearcoat", "primer", "filler", "hardener", "thinner", "sandpaper", "masking", "other"]
+        },
+        "packageSize": {
+          "type": "number"
+        },
+        "packageUnit": {
+          "type": "string",
+          "enum": ["g", "kg", "ml", "l", "pcs"]
+        },
+        "packagePrice": {
+          "type": "number"
+        },
+        "currency": {
+          "type": "string",
+          "enum": ["UAH", "USD"]
+        },
+        "isCustom": {
+          "type": "boolean"
+        },
+        "isSample": {
+          "type": "boolean"
+        },
+        "clientUpdatedAt": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "ownerId",
+        "id",
+        "workshopId",
+        "name",
+        "category",
+        "packageSize",
+        "packageUnit",
+        "packagePrice",
+        "currency",
+        "clientUpdatedAt",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "MasterLaborOperation": {
+      "title": "MasterLaborOperation",
+      "description": "Master labor price list entry.",
+      "type": "object",
+      "properties": {
+        "ownerId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "workshopId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "operationType": {
+          "type": "string",
+          "enum": [
+            "removal",
+            "installation",
+            "disassembly",
+            "assembly",
+            "surface_prep",
+            "painting",
+            "dent_repair",
+            "plastic_repair",
+            "polishing",
+            "custom"
+          ]
+        },
+        "customName": {
+          "type": "string",
+          "maxLength": 140
+        },
+        "basePrice": {
+          "type": "number"
+        },
+        "currency": {
+          "type": "string",
+          "enum": ["UAH", "USD"]
+        },
+        "isSample": {
+          "type": "boolean"
+        },
+        "clientUpdatedAt": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "ownerId",
+        "id",
+        "workshopId",
+        "operationType",
+        "basePrice",
+        "currency",
+        "clientUpdatedAt",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "PartQuickTemplate": {
+      "title": "PartQuickTemplate",
+      "description": "Per-part material consumption template for quick calculation mode.",
+      "type": "object",
+      "properties": {
+        "ownerId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "partId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "workshopId": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9_-]+$"
+        },
+        "rules": {
+          "type": "array",
+          "description": "Consumption rules (max 50)"
+        },
+        "clientUpdatedAt": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "ownerId",
+        "partId",
+        "workshopId",
+        "rules",
+        "clientUpdatedAt",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Owner root profile acting as Master Gate for all workshop subcollections."
+    },
+    "/users/{userId}/settings/{settingId}": {
+      "schema": { "$ref": "#/entities/WorkshopSettings" },
+      "description": "Synced workshop settings (app_settings document)."
+    },
+    "/users/{userId}/estimates/{estimateId}": {
+      "schema": { "$ref": "#/entities/Estimate" },
+      "description": "User's synced auto-body repair and paint orders/estimates."
+    },
+    "/users/{userId}/materials/{materialId}": {
+      "schema": { "$ref": "#/entities/MaterialCatalogItem" },
+      "description": "User's synced paint and consumables catalog."
+    },
+    "/users/{userId}/laborPrices/{operationId}": {
+      "schema": { "$ref": "#/entities/MasterLaborOperation" },
+      "description": "User's synced labor price list."
+    },
+    "/users/{userId}/partTemplates/{partId}": {
+      "schema": { "$ref": "#/entities/PartQuickTemplate" },
+      "description": "User's synced quick-mode material consumption templates."
+    }
+  }
+}

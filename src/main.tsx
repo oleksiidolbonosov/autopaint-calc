@@ -1,0 +1,33 @@
+import { createRoot } from 'react-dom/client';
+import { registerSW } from 'virtual:pwa-register';
+import App from './App.tsx';
+import { ErrorBoundary } from './components/ErrorBoundary.tsx';
+import './index.css';
+
+if (typeof navigator !== 'undefined' && 'serviceWorker' in navigator) {
+  let reloading = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (reloading) return;
+    reloading = true;
+    window.location.reload();
+  });
+
+  registerSW({
+    immediate: true,
+    onRegisteredSW(_swUrl, registration) {
+      if (!registration) return;
+      void registration.update().catch(() => undefined);
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') {
+          void registration.update().catch(() => undefined);
+        }
+      });
+    },
+  });
+}
+
+createRoot(document.getElementById('root')!).render(
+  <ErrorBoundary>
+    <App />
+  </ErrorBoundary>
+);

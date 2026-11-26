@@ -1,0 +1,6 @@
+{
+  "name": "AutoPaint Calc",
+  "description": "Mobile-first auto body repair and painting cost calculator PWA with offline IndexedDB storage, interactive SVG vehicle diagram, and UAH/USD support.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

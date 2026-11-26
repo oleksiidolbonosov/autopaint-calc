@@ -1,0 +1,8 @@
+{
+  "firestore": [
+    {
+      "database": "ai-studio-autopaintcalc-73f16123-dd22-43f9-a1f8-a1e07b7f0cd2",
+      "rules": "firestore.rules"
+    }
+  ]
+}
